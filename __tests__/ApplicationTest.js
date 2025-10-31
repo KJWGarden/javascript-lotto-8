@@ -8,6 +8,20 @@ test("입력 금액이 1000원이 아닌경우", async () => {
   await expect(app.run()).rejects.toThrow("[ERROR]");
 });
 
+describe("getLottoCount 단위 테스트", () => {
+  test("입력 금액이 5000원일 경우 5개를 반환한다.", () => {
+    const app = new App();
+    const result = app.getLottoCount(5000);
+    expect(result).toBe(5);
+  });
+
+  test("입력 금액이 3000원일 경우 3개를 반환한다.", () => {
+    const app = new App();
+    const result = app.getLottoCount(3000);
+    expect(result).toBe(3);
+  });
+});
+
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
 

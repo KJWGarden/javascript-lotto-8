@@ -1,6 +1,13 @@
 import App from "../src/App.js";
 import { MissionUtils } from "@woowacourse/mission-utils";
 
+test("입력 금액이 1000원이 아닌경우", async () => {
+  const app = new App();
+  mockQuestions(["1500"]);
+
+  await expect(app.run()).rejects.toThrow("[ERROR]");
+});
+
 const mockQuestions = (inputs) => {
   MissionUtils.Console.readLineAsync = jest.fn();
 

@@ -5,11 +5,14 @@ class App {
     const cost = await this.getPurchase();
     this.costException(cost);
     const iterate = this.getLottoCount(cost);
+    Console.print(`\n${iterate + "개를 구매했습니다."}`);
     Console.print(this.getLotto(iterate));
   }
 
   async getPurchase() {
-    const inputcost = await Console.readLineAsync("구입금액을 입력해 주세요\n");
+    const inputcost = await Console.readLineAsync(
+      "구입금액을 입력해 주세요.\n"
+    );
     return inputcost;
   }
 

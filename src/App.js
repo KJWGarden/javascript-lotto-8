@@ -1,14 +1,15 @@
-import { Console } from "@woowacourse/mission-utils";
+import { Console, MissionUtils } from "@woowacourse/mission-utils";
 
 class App {
   async run() {
     const cost = await this.getPurchase();
     this.costException(cost);
-    this.getLottoCount(cost);
+    const iterate = this.getLottoCount(cost);
+    Console.print(this.getLotto(iterate));
   }
 
   async getPurchase() {
-    const inputcost = await Console.readLineAsync("구입금액을 입력해 주세요");
+    const inputcost = await Console.readLineAsync("구입금액을 입력해 주세요\n");
     return inputcost;
   }
 
@@ -21,6 +22,16 @@ class App {
   getLottoCount(cost) {
     const count = cost / 1000;
     return count;
+  }
+
+  getLotto(iter) {
+    let result = "";
+    for (let i = 0; i < iter; i++) {
+      result += `${
+        "[" + MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6) + "]\n"
+      }`;
+    }
+    return result;
   }
 }
 

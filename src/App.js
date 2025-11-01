@@ -60,6 +60,9 @@ class App {
     }
 
     const numbers = prizeNum.split(",").map((number) => number.trim());
+    if (numbers.length != 6) {
+      throw new Error("[ERROR] 당첨번호는 6개를 입력해야 합니다.");
+    }
 
     const numSet = new Set();
     for (const number of numbers) {

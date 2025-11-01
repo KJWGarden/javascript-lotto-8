@@ -42,7 +42,42 @@ class App {
     const prizeNum = await Console.readLineAsync(
       "\n당첨 번호를 입력해 주세요.\n"
     );
-    return prizeNum;
+    const prizeNumSet = this.validatePrizeNum(prizeNum);
+    return prizeNumSet;
+  }
+
+  validatePrizeNum(prizeNum) {
+    if (!prizeNum || prizeNum.trim() === "") {
+      throw new Error("[ERROR] 당첨번호를 입력해야 합니다.");
+    }
+    if (!prizeNum.includes(",") && prizeNum.trim().includes(" ")) {
+      throw new Error("[ERROR] 당첨번호는 쉼표(,)로만 구분해야 합니다.");
+    }
+    if (/[^0-9,]/.test(prizeNum)) {
+      throw new Error(
+        "[ERROR] 당첨번호는 숫자와 쉼표(,)로만 입력되어야 합니다."
+      );
+    }
+
+    const numbers = prizeNum.split(",").map((number) => number.trim());
+
+    const numSet = new Set();
+    for (const number of numbers) {
+      if (number == "") {
+        throw new Error("[ERROR] 당첨번호는 비어 있을 수 없습니다.");
+      }
+
+      if (number < 1 || number > 45) {
+        throw new Error("[ERROR] 당첨번호는 1과 45사이의 숫자여야 합니다.");
+      }
+
+      if (numSet.has(number)) {
+        throw new Error("[ERROR] 당첨번호는 중복될 수 없습니다.");
+      }
+
+      numSet.add(number);
+    }
+    return numSet;
   }
 }
 

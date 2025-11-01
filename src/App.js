@@ -29,11 +29,10 @@ class App {
   }
 
   getLotto(iter) {
-    let result = "";
+    let result = [];
     for (let i = 0; i < iter; i++) {
-      result += `${
-        "[" + MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6) + "]\n"
-      }`;
+      const numbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+      result.push(numbers);
     }
     return result;
   }

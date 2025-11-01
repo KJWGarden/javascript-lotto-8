@@ -23,7 +23,7 @@ describe("getLottoCount 단위 테스트", () => {
 });
 
 describe("getLotto 함수 테스트", () => {
-  test("로또 2개 생성 시 각각의 번호 배열이 문자열로 반환된다.", () => {
+  test("로또 2개 생성 시 각각의 번호 배열이 반환된다.", () => {
     const app = new App();
 
     MissionUtils.Random.pickUniqueNumbersInRange = jest
@@ -33,9 +33,12 @@ describe("getLotto 함수 테스트", () => {
 
     const result = app.getLotto(2);
 
-    const expected = "[1,2,3,4,5,6]\n[7,8,9,10,11,12]\n";
+    const expected = [
+      [1, 2, 3, 4, 5, 6],
+      [7, 8, 9, 10, 11, 12],
+    ];
 
-    expect(result).toBe(expected);
+    expect(result).toEqual(expected);
   });
 });
 

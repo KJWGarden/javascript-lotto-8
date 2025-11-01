@@ -7,6 +7,7 @@ class App {
     const iterate = this.getLottoCount(cost);
     Console.print(`\n${iterate + "개를 구매했습니다."}`);
     Console.print(this.getLotto(iterate));
+    const prizeNum = this.getPrizeNum();
   }
 
   async getPurchase() {
@@ -35,6 +36,13 @@ class App {
       }`;
     }
     return result;
+  }
+
+  async getPrizeNum() {
+    const prizeNum = await Console.readLineAsync(
+      "\n당첨 번호를 입력해 주세요.\n"
+    );
+    return prizeNum;
   }
 }
 

@@ -32,6 +32,7 @@ class App {
     let result = [];
     for (let i = 0; i < iter; i++) {
       const numbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
+      numbers.sort((a, b) => a - b);
       result.push(numbers);
     }
     return result;

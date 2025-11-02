@@ -1,4 +1,5 @@
 import { Console, MissionUtils } from "@woowacourse/mission-utils";
+import Lotto from "./Lotto.js";
 
 class App {
   async run() {
@@ -33,7 +34,9 @@ class App {
     for (let i = 0; i < iter; i++) {
       const numbers = MissionUtils.Random.pickUniqueNumbersInRange(1, 45, 6);
       numbers.sort((a, b) => a - b);
-      result.push(numbers);
+
+      const lotto = new Lotto(numbers);
+      result.push(lotto.getNumbers());
     }
     return result;
   }

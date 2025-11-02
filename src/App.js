@@ -146,6 +146,15 @@ class App {
     );
     Console.print(`6개 일치 (${prizeMoney[1]}원) - ${result[1]}개`);
   }
+
+  calculateProfit(result, cost) {
+    const prizeMoney = this.getPrizeMoney();
+    let total = 0;
+    for (const rank in result) {
+      total += result[rank] * prizeMoney[rank];
+    }
+    return ((total / cost) * 100).toFixed(1);
+  }
 }
 
 export default App;

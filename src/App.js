@@ -68,28 +68,9 @@ class App {
       );
     }
 
-    const numbers = prizeNum.split(",").map((number) => number.trim());
-    if (numbers.length != 6) {
-      throw new Error("[ERROR] 당첨번호는 6개를 입력해야 합니다.");
-    }
-
-    const numSet = new Set();
-    for (const number of numbers) {
-      if (number == "") {
-        throw new Error("[ERROR] 당첨번호는 비어 있을 수 없습니다.");
-      }
-
-      if (number < 1 || number > 45) {
-        throw new Error("[ERROR] 당첨번호는 1과 45사이의 숫자여야 합니다.");
-      }
-
-      if (numSet.has(number)) {
-        throw new Error("[ERROR] 당첨번호는 중복될 수 없습니다.");
-      }
-
-      numSet.add(number);
-    }
-    return numSet;
+    const numbers = prizeNum.split(",").map((number) => Number(number.trim()));
+    const winLotto = new Lotto(numbers);
+    return new Set(winLotto.getNumbers());
   }
 
   async getBonusNum() {

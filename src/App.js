@@ -8,7 +8,8 @@ class App {
     const iterate = this.getLottoCount(cost);
     Console.print(`\n${iterate + "개를 구매했습니다."}`);
     Console.print(this.getLotto(iterate));
-    const prizeNum = this.getPrizeNum();
+    const prizeNum = await this.getPrizeNum();
+    const bonusNum = await this.getBonusNum();
   }
 
   async getPurchase() {
@@ -84,6 +85,13 @@ class App {
       numSet.add(number);
     }
     return numSet;
+  }
+
+  async getBonusNum() {
+    const bonusNum = await Console.readLineAsync(
+      "\n보너스 번호를 입력해 주세요.\n"
+    );
+    return bonusNum;
   }
 }
 

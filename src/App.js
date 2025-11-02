@@ -95,7 +95,7 @@ class App {
     const bonusNum = await Console.readLineAsync(
       "\n보너스 번호를 입력해 주세요.\n"
     );
-    return bonusNum;
+    return Number(bonusNum);
   }
 
   validateBonusNum(bonusNum, numSet) {

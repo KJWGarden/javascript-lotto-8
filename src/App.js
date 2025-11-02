@@ -8,12 +8,13 @@ class App {
     const iterate = this.getLottoCount(cost);
     Console.print(`\n${iterate + "개를 구매했습니다."}`);
     const lottoSet = this.getLotto(iterate);
-    Console.print(lottoSet);
+    lottoSet.forEach((numbers) => Console.print(`[${numbers.join(", ")}]`));
     const prizeNum = await this.getPrizeNum();
     const bonusNum = await this.getBonusNum();
     this.validateBonusNum(bonusNum, prizeNum);
     const result = this.checkWin(lottoSet, prizeNum, bonusNum);
     this.printWin(result);
+    this.printProfit(result, cost);
   }
 
   async getPurchase() {
@@ -138,13 +139,23 @@ class App {
   printWin(result) {
     const prizeMoney = this.getPrizeMoney();
     Console.print("\n당첨 통계\n---\n");
-    Console.print(`3개 일치 (${prizeMoney[5]}원) - ${result[5]}개`);
-    Console.print(`4개 일치 (${prizeMoney[4]}원) - ${result[4]}개`);
-    Console.print(`5개 일치 (${prizeMoney[3]}원) - ${result[3]}개`);
     Console.print(
-      `5개 일치, 보너스 볼 일치 (${prizeMoney[2]}원) - ${result[2]}개`
+      `3개 일치 (${prizeMoney[5].toLocaleString("ko-KR")}원) - ${result[5]}개`
     );
-    Console.print(`6개 일치 (${prizeMoney[1]}원) - ${result[1]}개`);
+    Console.print(
+      `4개 일치 (${prizeMoney[4].toLocaleString("ko-KR")}원) - ${result[4]}개`
+    );
+    Console.print(
+      `5개 일치 (${prizeMoney[3].toLocaleString("ko-KR")}원) - ${result[3]}개`
+    );
+    Console.print(
+      `5개 일치, 보너스 볼 일치 (${prizeMoney[2].toLocaleString(
+        "ko-KR"
+      )}원) - ${result[2]}개`
+    );
+    Console.print(
+      `6개 일치 (${prizeMoney[1].toLocaleString("ko-KR")}원) - ${result[1]}개`
+    );
   }
 
   calculateProfit(result, cost) {
@@ -154,6 +165,10 @@ class App {
       total += result[rank] * prizeMoney[rank];
     }
     return ((total / cost) * 100).toFixed(1);
+  }
+
+  printProfit(result, cost) {
+    Console.print(`총 수익률은 ${this.calculateProfit(result, cost)}%입니다.`);
   }
 }
 

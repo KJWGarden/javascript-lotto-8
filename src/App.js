@@ -12,6 +12,8 @@ class App {
     const prizeNum = await this.getPrizeNum();
     const bonusNum = await this.getBonusNum();
     this.validateBonusNum(bonusNum, prizeNum);
+    const result = this.checkWin(lottoSet, prizeNum, bonusNum);
+    this.printWin(result);
   }
 
   async getPurchase() {
@@ -49,7 +51,7 @@ class App {
       "\n당첨 번호를 입력해 주세요.\n"
     );
     const prizeNumSet = this.validatePrizeNum(prizeNum);
-    return prizeNumSet;
+    return new Set([...prizeNumSet].map(Number));
   }
 
   validatePrizeNum(prizeNum) {
@@ -134,6 +136,18 @@ class App {
       4: 50000,
       5: 5000,
     };
+  }
+
+  printWin(result) {
+    const prizeMoney = this.getPrizeMoney();
+    Console.print("\n당첨 통계\n---\n");
+    Console.print(`3개 일치 (${prizeMoney[5]}원) - ${result[5]}개`);
+    Console.print(`4개 일치 (${prizeMoney[4]}원) - ${result[4]}개`);
+    Console.print(`5개 일치 (${prizeMoney[3]}원) - ${result[3]}개`);
+    Console.print(
+      `5개 일치, 보너스 볼 일치 (${prizeMoney[2]}원) - ${result[2]}개`
+    );
+    Console.print(`6개 일치 (${prizeMoney[1]}원) - ${result[1]}개`);
   }
 }
 

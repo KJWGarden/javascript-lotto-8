@@ -7,7 +7,8 @@ class App {
     this.costException(cost);
     const iterate = this.getLottoCount(cost);
     Console.print(`\n${iterate + "개를 구매했습니다."}`);
-    Console.print(this.getLotto(iterate));
+    const lottoSet = this.getLotto(iterate);
+    Console.print(lottoSet);
     const prizeNum = await this.getPrizeNum();
     const bonusNum = await this.getBonusNum();
     this.validateBonusNum(bonusNum, prizeNum);
@@ -108,6 +109,21 @@ class App {
     if (numSet.has(bonusNum)) {
       throw new Error("[ERROR] 보너스 번호는 당첨번호와 중복될 수 없습니다.");
     }
+  }
+
+  checkWin(lottoSet, prizeNum, bonusNum) {
+    const result = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+    const winningSet = new Set(prizeNum);
+    for (const lotto of lottoSet) {
+      const matchCnt = lotto.filter((n) => winningSet.has(n)).length;
+      const hasBonus = lotto.includes(bonusNum);
+      if (matchCnt === 6) result[1]++;
+      else if (matchCnt === 5 && hasBonus) result[2]++;
+      else if (matchCnt === 5) result[3]++;
+      else if (matchCnt === 4) result[4]++;
+      else if (matchCnt === 3) result[5]++;
+    }
+    return result;
   }
 }
 

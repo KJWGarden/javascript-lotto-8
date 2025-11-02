@@ -99,7 +99,7 @@ class App {
   }
 
   validateBonusNum(bonusNum, numSet) {
-    if (!bonusNum || bonusNum.trim() === "") {
+    if (bonusNum == null || isNaN(bonusNum)) {
       throw new Error("[ERROR] 보너스 번호를 입력해야 합니다.");
     }
     if (/[^0-9]/.test(bonusNum)) {
